@@ -24,7 +24,7 @@ while ~feof(fid)
     if i == 1
         pause(1);
     end
-    pause(0.004);
+    pause(0.4);
     i = i + 1;
 end
 fclose(fid);
