@@ -3,3 +3,4 @@ out
 *.exe
 *.out
 other
+.DS_Store
