@@ -9,7 +9,7 @@ M = MM*(b-a);
 [x,y] = meshgrid(a:dx:b);
 % [xq, yq] = meshgrid(a:dx/k:b);
 %% LETS MAKE A MOVIE
-fid = fopen(".o");
+fid = fopen("temp.o");
 i = 1;
 while ~feof(fid)
     %% READ CURRENT TEMP
