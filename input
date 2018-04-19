@@ -1,0 +1,14 @@
+TIME
+factor  dtout   tend
+0.9     1       10
+SPACE
+MM  a   b
+40  0    1
+MATERIAL
+rho     L       Tm      h       Tinf
+7850    272     1811    25      298
+Cs      Cl      ks      kl
+.45     .197    60      40
+INITIAL CONDITIONS
+T0      Q0
+298     500000

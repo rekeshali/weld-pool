@@ -1,0 +1,25 @@
+//============================================ create fluxes at faces between CV's
+void flux(double F[], double T[], double p[]){
+	// c++ indices start at 0 so must call first face 0th face
+    // F[i] means F[i+1/2]
+    double k, ki, kip, R;
+    // Boundaries
+    F[0] = Q0;
+    k = conduct(p[M-1]);
+    R = dx/(2*k);
+    //F[M] = - (T[M] - Tinf)/(R + 1/h);
+    F[M] = -(T[M+1] - T[M])/R;
+
+
+	for(int i = 1; i <= M-1; i++){ // 1+1/2 < i+1/2 < M+1/2
+        // get k and R
+        kip = conduct(p[i]); // ki+1
+        ki = conduct(p[i-1]); // ki
+        R = dx/(2*kip) + dx/(2*ki); // Ri+1/2
+        // compute flux
+		F[i] = -(T[i+1] - T[i])/R; // Fi+1/2
+        if (i ==1 ) {
+            printf("flux=%f\n", F[i]);
+        }
+	}
+}
