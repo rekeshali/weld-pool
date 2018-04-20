@@ -7,24 +7,24 @@ void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], doub
 		k = conduct(p[1][j]);
 		R = dx/(2*k);
 		//Fx[0][j] = -(T[1][j] - Q0)/R; //F_1/2
-        Fx[0][j] = (T[0][j] - Tinf)/(R + 1/h); // convective 2-D
+        Fx[0][j] = - (T[0][j] - Tinf)/(R + 1/h); // left; convective 2-D
 		k = conduct(p[M][j]);
 		R = dx/(2*k);
 		//F[M] = - (T[M] - Tinf)/(R + 1/h); // convective 1-D
-		//Fx[M][j] = -(T[M+1][j] - T[M][j])/R; // insulated 2-D
-		Fx[M][j] = - (T[M][j] - Tinf)/(R + 1/h); // convective 2-D
+		//Fx[M][j] = - (T[M+1][j] - T[M][j])/R; // insulated 2-D
+		Fx[M][j] = - (T[M][j] - Tinf)/(R + 1/h); // right; convective 2-D
 	}
 		// Bottom and top
 	for(int i = 1; i <= M; i++){
 		k = conduct(p[i][1]);
 		R = dx/(2*k);
-		//Fy[i][0] = -(T[i][1] - Q0)/R; //F_1/2
-        Fy[i][0] = -(T[i][0] - Tinf)/(R + 1/h); // convective 2-D
+		Fy[i][0] = -(T[i][1] - Q0)/R; //F_1/2
+//        Fy[i][0] = - (T[i][0] - Tinf)/(R + 1/h); // bottom; convective 2-D
 		k = conduct(p[i][M]);
 		R = dx/(2*k);
 		//F[M] = - (T[M] - Tinf)/(R + 1/h); // convective 1-D
-		//Fy[i][M] = -(T[i][M+1] - T[i][M])/R; // insulated 2-D
-		Fy[i][M] = -(T[i][M] - Tinf)/(R + 1/h); // convective 2-D
+//		Fy[i][M] = - (T[i][M] - Q0)/R; // input flux
+		Fy[i][M] = - (T[i][M] - Tinf)/(R + 1/h); // convective 2-D
 	}
 
 	// LEFT TO RIGHT FLUX
