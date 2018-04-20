@@ -25,9 +25,9 @@ void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], doub
 		//F[M] = - (T[M] - Tinf)/(R + 1/h); // convective 1-D
         a_gauss = Q0;
         b_gauss = 0.5 * (b-a);
-        c_gauss = 1/(Q0 * sqrt(2*PI));
-        x_gauss = a + (double(i) - 0.5)*dx;
-        Q_gauss = a_gauss * exp(-(x_gauss - b_gauss)**2/(2*c_gauss*c_gauss)); // gaussian distribution of flux
+        c_gauss = 1/(Q0 * sqrt(2*pi));
+        x_gauss = a + ((double)i - 0.5)*dx;
+        Q_gauss = a_gauss * exp(-(x_gauss - b_gauss)*(x_gauss - b_gauss)/(2*c_gauss*c_gauss)); // gaussian distribution of flux
   		Fy[i][M] =(T[i][M] - Q_gauss)/R; // input flux
 		//Fy[i][M] = (T[i][M] - Tinf)/(R + 1/h); // convective 2-D
 	}

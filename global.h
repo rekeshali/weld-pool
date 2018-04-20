@@ -7,3 +7,4 @@
  double rho, L;
  double h, Tinf;
  double T0, Q0, Tm;
+#define pi 3.14159265358979323846
