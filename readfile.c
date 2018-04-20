@@ -1,5 +1,5 @@
 //========================== READ INPUTS
-void readfile(char filename[], double *factor, double *dtout, double *tend, int *MM, double *a, double *b){
+void readfile(char filename[], double *factor, double *dtout, double *tend, int *MM){
 	FILE * IN;
     int n = 255;
     char buff[n];
@@ -13,7 +13,7 @@ void readfile(char filename[], double *factor, double *dtout, double *tend, int 
     // SPACE
     fgets(buff, n, IN);
     fgets(buff, n, IN);
-    fscanf(IN, "%i %lf %lf\n", MM, a, b);
+    fscanf(IN, "%i %lf %lf\n", MM, &a, &b);
 
     // MATERIAL
     fgets(buff, n, IN);

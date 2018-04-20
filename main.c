@@ -18,15 +18,15 @@ int main(int argc, char * argv[]){
 
 	//============================ READ INPUTS
 	int MM;
-	double tend, dtout, factor, a, b;
-	readfile(inp, &factor, &dtout, &tend, &MM, &a, &b); // reads from filename inp
+	double tend, dtout, factor;
+	readfile(inp, &factor, &dtout, &tend, &MM); // reads from filename inp
 
 	//============================ CREATE MESH
 	M = MM*(int)(b-a); // number of CV's
 	const int W = M;
 	dx = 1./((double)(MM)), dy = 1./((double)(MM)); // spacing between nodes
 	double X[M+2], Y[M+2]; // nodal array
-	mesh(X, Y, a, b); // fills array with positions of nodes
+	mesh(X, Y); // fills array with positions of nodes
 
 	//============================ SET TIMESTEP
 	double t0 = 0.0; // start time

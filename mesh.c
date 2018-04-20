@@ -1,5 +1,5 @@
 // create 1D mesh array
-void mesh(double X[], double Y[], double a, double b){
+void mesh(double X[], double Y[]){
 	X[0] = a; // boundaries
 	X[M+1] = b;
 	Y[0] = a;
