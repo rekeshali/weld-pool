@@ -11,6 +11,9 @@ M = MM*(b-a);
 %% LETS MAKE A MOVIE
 fid = fopen("temp.o");
 i = 1;
+h = figure;
+%axis tight manual % this ensures that getframe() returns a consistent size
+filename = 'testAnimated.gif';
 while ~feof(fid)
     %% READ CURRENT TEMP
     T = fgetmat(fid);
@@ -24,7 +27,17 @@ while ~feof(fid)
     if i == 1
         pause(1);
     end
-    pause(0.4);
-    i = i + 1;
+    pause(0.0004);
+          % Capture the plot as an image 
+      frame = getframe(h); 
+      im = frame2im(frame); 
+      [imind,cm] = rgb2ind(im,256); 
+      % Write to the GIF File 
+      if i == 1 
+          imwrite(imind,cm,filename,'gif', 'Loopcount',inf, 'WriteMode','overwrite'); 
+      else 
+          imwrite(imind,cm,filename,'gif','WriteMode','append'); 
+      end 
+       i = i + 1;
 end
 fclose(fid);
