@@ -12,7 +12,7 @@ void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], doub
 		R = dx/(2*k);
 		//F[M] = - (T[M] - Tinf)/(R + 1/h); // convective 1-D
 		//Fx[M][j] = - (T[M+1][j] - T[M][j])/R; // insulated 2-D
-		Fx[M][j] = - (T[M][j] - Tinf)/(R + 1/h); // right; convective 2-D
+		Fx[M][j] = - (T[M][M] - Tinf)/(R + 1/h); // right; convective 2-D
 	}
 		// Bottom and top
 	for(int i = 1; i <= M; i++){
