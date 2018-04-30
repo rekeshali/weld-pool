@@ -6,20 +6,20 @@ void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+
 	FILE * PHASE;
 	FILE * ENTH; // initialize file var
 	if(!nsteps){ // if haven't begun time stepping 
-		OUT = fopen("values.o", "w"); // new file
+		OUT = fopen("outputs/values.o", "w"); // new file
 		fprintf(OUT,"#nstep time\n");
-		TEMP = fopen("temp.o", "w"); // new file
+		TEMP = fopen("outputs/temp.o", "w"); // new file
 		//fprintf(TEMP,"#Temperatures by timesteps\n");
-		PHASE = fopen("phase.o", "w"); // new file
+		PHASE = fopen("outputs/phase.o", "w"); // new file
 		//fprintf(PHASE,"#Liquid fraction by timestep\n");
-		ENTH = fopen("enth.o", "w"); // new file
+		ENTH = fopen("outputs/enth.o", "w"); // new file
 		//fprintf(ENTH,"#Enthalpies by timestep\n");
 	}
 	else{
-		OUT = fopen("values.o", "a"); // old file
-		TEMP = fopen("temp.o", "a"); // old file
-		PHASE = fopen("phase.o", "a"); // old file
-		ENTH = fopen("enth.o", "a"); // old file
+		OUT = fopen("outputs/values.o", "a"); // old file
+		TEMP = fopen("outputs/temp.o", "a"); // old file
+		PHASE = fopen("outputs/phase.o", "a"); // old file
+		ENTH = fopen("outputs/enth.o", "a"); // old file
 	}
 	// hidden time, steps, error
 	// position and profile in columns
