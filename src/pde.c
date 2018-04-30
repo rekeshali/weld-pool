@@ -1,4 +1,5 @@
 //========================================== Forward Euler (explicit)
+#include "global.h"
 void pde(const int W, double E[][W+1], double Fx[][W+1], double Fy[][W+1]){
     // Energy is conserved within nodes only..
 	for(int i = 1; i <= M; i++){

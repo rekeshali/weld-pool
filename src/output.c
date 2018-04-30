@@ -1,10 +1,12 @@
 //======================== print solution profile to text file at certain times
+#include "global.h"
+#include <stdio.h>
 void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+1], double Fy[][W+1], double E[][W+1], double p[][W+1], double time, int nsteps, double ERR){
 	double flux, energy, phase;
-	FILE * OUT;
-	FILE * TEMP;
-	FILE * PHASE;
-	FILE * ENTH; // initialize file var
+	FILE *OUT;
+	FILE *TEMP;
+	FILE *PHASE;
+	FILE *ENTH; // initialize file var
 	if(!nsteps){ // if haven't begun time stepping 
 		OUT = fopen("outputs/values.o", "w"); // new file
 		fprintf(OUT,"#nstep time\n");

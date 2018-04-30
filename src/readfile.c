@@ -1,6 +1,8 @@
 //========================== READ INPUTS
+#include "global.h"
+#include <stdio.h>
 void readfile(char filename[], double *factor, double *dtout, double *tend, int *MM){
-	FILE * IN;
+	FILE *IN;
     int n = 255;
     char buff[n];
     IN = fopen(filename, "r");

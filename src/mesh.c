@@ -1,4 +1,5 @@
 // create 1D mesh array
+#include "global.h"
 void mesh(double X[], double Y[]){
 	X[0] = a; // boundaries
 	X[M+1] = b;

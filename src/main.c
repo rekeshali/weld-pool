@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "sub.h" // includes all subroutines
+#include "global.h" // includes all subroutines
 
 int main(int argc, char * argv[]){
 	//============================ Initialize I/O

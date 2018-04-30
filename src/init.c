@@ -1,4 +1,5 @@
 //================================== CREATE INITIAL PROFILE
+#include "global.h"
 void init(const int W, double T[][W+2], double E[][W+1], double p[][W+1]){
 	// for nodes and boundaries
 	for(int i = 0; i <= M+1; i++){

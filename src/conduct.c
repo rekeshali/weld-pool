@@ -1,4 +1,5 @@
 //=================================== Compute conductivities
+#include "global.h"
 double conduct(double p){
     // check liquid fraction of node
     if(p == 0){
