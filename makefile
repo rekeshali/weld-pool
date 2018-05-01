@@ -7,7 +7,7 @@ CFLAGS = -I$(IDIR) -O2
 SDIR = src
 ODIR = src/obj
 
-_DEPS = global.h
+_DEPS = global.h declarations.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = main.o readfile.o init.o mesh.o output.o flux.o pde.o eos.o conduct.o

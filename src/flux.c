@@ -1,5 +1,9 @@
 //============================================ create fluxes at faces between CV's
 #include "global.h"
+#include <math.h>
+
+double conduct(double p);  // declare function
+
 void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], double p[][W+1]){
 	double k, ki, kim, R, a_gauss, b_gauss, c_gauss, x_gauss, Q_gauss;
 	// Boundaries

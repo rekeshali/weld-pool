@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "global.h" // includes all subroutines
+#include "declarations.h"  // to get rid of compiler warnings
 
 int main(int argc, char * argv[]){
 	//============================ Initialize I/O

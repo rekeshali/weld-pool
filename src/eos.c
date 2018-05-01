@@ -1,5 +1,8 @@
 //============================= EQUATION OF STATE
 #include "global.h"
+
+double conduct(double p);  // declare function
+
 void eos(const int W, double E[][W+1], double T[][W+2], double p[][W+1], double Fx[][W+1], double Fy[][W+1]){
 	// Nodes
 	for(int i = 1; i <= M; i++){
