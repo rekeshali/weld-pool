@@ -10,7 +10,7 @@
 int main(int argc, char * argv[]){
 	//============================ Initialize I/O
 	char inp[20];
-	char out[20];
+//	char out[20];
 	if(argc == 1){
 		sprintf(inp, "input");
 	}else{
@@ -38,7 +38,7 @@ int main(int argc, char * argv[]){
 	int Nend = (int)((tend - t0)/dt) + 1; // number of timesteps
 	int nsteps = 0; // initialize timestep
 	double time = t0; // initialize time
-	double tout = fmax(dtout, dt), tout2 = 0.004; // time for printing to file
+	double tout = fmax(dtout, dt); //tout2 = 0.004; // time for printing to file
 
 	//============================ INITIALIZE PROFILE
 	double T[M+2][M+2], E[M+1][M+1], p[M+1][M+1], ERR = 0.0; // solution array and max error
