@@ -32,6 +32,10 @@ Test it to see if it works properly.
 make test
 ```
 
+## Cool Features
+
+* The makefile will only compile whats necessary after changes.
+
 ## Built With
 
 * C
