@@ -35,10 +35,12 @@ make test
 ## Cool Features
 
 * The makefile will only compile whats necessary after changes.
+* Parallel computation via OpenMP. Test case went from 16 seconds to 3 seconds
 
 ## Built With
 
 * C
+* OpenMP
 * MATLAB
 
 ## Authors

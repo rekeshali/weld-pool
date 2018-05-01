@@ -16,6 +16,11 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: $(SDIR)/%.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+all: weld.exe
+
+parallel: CFLAGS += -fopenmp
+parallel: weld.exe
+
 weld.exe: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 

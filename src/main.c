@@ -49,6 +49,7 @@ int main(int argc, char * argv[]){
 	double Fx[M+1][M+1], Fy[M+1][M+1]; // initialize flux array
 	output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, ERR); // print to file
 
+    #pragma omp parallel for num_threads(4) schedule(dynamic)  // parallel for loop
 	for(nsteps = 1; nsteps <= Nend; nsteps++){
 		time = nsteps*dt; // current time
 		flux(W, Fx, Fy, T, p); // current flux at walls
