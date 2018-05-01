@@ -10,14 +10,14 @@ _DEPS = global.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))  # adds path to dependencies
 
 _OBJ = main.o readfile.o init.o mesh.o output.o flux.o pde.o eos.o conduct.o
-OBJ = $(patsubst %,$(ODIR)%,$(_OBJ))  # adds path
+#OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))  # adds path
+OBJ = $(patsubst %,./src/obj/%,$(_OBJ))
 
 #$(ODIR)/%.o: %.c $(DEPS)
 ./src/obj/%.o: ./src/%.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-#weld.exe: $(OBJ)
-weld.exe: src/obj/main.o src/obj/readfile.o src/obj/init.o src/obj/mesh.o src/obj/output.o src/obj/flux.o src/obj/pde.o src/obj/eos.o src/obj/conduct.o
+weld.exe: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 test:
