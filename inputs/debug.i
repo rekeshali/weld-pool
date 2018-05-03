@@ -1,6 +1,6 @@
 TIME
 factor  dtout   tend
-0.5     0.004       1
+1.0     0.004       1
 SPACE
 MM  a   b
 100  0    1
@@ -11,4 +11,4 @@ Cs      Cl      ks      kl
 1       1       1      1
 INITIAL CONDITIONS
 T0      Tl      Tmax
-0       2       3
+0       2       100

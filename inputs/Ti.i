@@ -11,4 +11,4 @@ Cs      Cl      ks      kl
 536     592     21      30
 INITIAL CONDITIONS
 T0      Q0      Tmax
-298     3000    2200
+298     30000    2200
