@@ -6,5 +6,5 @@
  double ks, kl;
  double rho, L;
  double h, Tinf;
- double T0, Q0, Tm;
+ double T0, Q0, Tm, Tmax;
 #define pi 3.14159265358979323846

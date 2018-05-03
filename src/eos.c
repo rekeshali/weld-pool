@@ -19,6 +19,9 @@ void eos(const int W, double E[][W+1], double T[][W+2], double p[][W+1], double 
 				//printf("im liquid\n");
 				T[i][j] = Tm + (E[i][j] - rho*L)/(rho*Cl);
 				p[i][j] = 1;
+				if(T[i][j] > Tmax){
+					printf("T(%i,%i) = %f > Tmax = %f\n", i, j, T[i][j], Tmax);
+				}
 				//printf("%i frac=%f",i, p[i]);
 			}
 		/*if (i ==i){

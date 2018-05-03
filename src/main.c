@@ -23,7 +23,8 @@ int main(int argc, char * argv[]){
 	readfile(inp, &factor, &dtout, &tend, &MM); // reads from filename inp
 
 	//============================ CREATE MESH
-	M = MM*(int)(b-a); // number of CV's
+	M = (double)MM*(b-a); // number of CV's
+	M = (int)M;
 	const int W = M;
 	dx = 1./((double)(MM)), dy = 1./((double)(MM)); // spacing between nodes
 	double X[M+2], Y[M+2]; // nodal array
@@ -33,7 +34,7 @@ int main(int argc, char * argv[]){
 	double t0 = 0.0; // start time
 	double kmax = fmax(kl, ks);
 	double Cmin = fmin(Cl, Cs);
-	double dtEXPL = dx*dx*Cmin*rho/(2.*kmax*Q0); // CFL number
+	double dtEXPL = dx*dx*Cmin*rho/(2.*kmax*Tmax); // CFL number
 	dt = factor*dtEXPL; // dt fraction of CFL for stability purposes
 	int Nend = (int)((tend - t0)/dt) + 1; // number of timesteps
 	int nsteps = 0; // initialize timestep

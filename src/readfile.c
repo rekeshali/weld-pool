@@ -27,7 +27,7 @@ void readfile(char filename[], double *factor, double *dtout, double *tend, int 
     // IBCs
     fgets(buff, n, IN);
     fgets(buff, n, IN);
-    fscanf(IN, "%lf %lf\n", &T0, &Q0);
+    fscanf(IN, "%lf %lf %lf\n", &T0, &Q0, &Tmax);
 
     // printf("%i, %f, %f, %f, %f\n", MM, Cs, b, Q0, T0);
     fclose(IN);
