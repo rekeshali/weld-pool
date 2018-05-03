@@ -2,6 +2,7 @@ function plotmain(inputfile,outputfile, dtquit)
     % Example: plotmain('debug','temp') runs the temp output from the debug
     % input file
     [x, y, dtout] = readinput(inputfile); % gets mesh and dtout
+    scale = 1000; % dtout scale
     
     gifname = sprintf('%s_%s.gif', outputfile, inputfile); % name of gif
     command = sprintf('rm %s', gifname); % deletes old
@@ -17,6 +18,7 @@ function plotmain(inputfile,outputfile, dtquit)
     i = 1;
     h = figure;
     set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.1, .6, 0.8]);
+    set(gcf,'color','w');
     
     while ~feof(fid)
         O = fgetmat(fid); % gets output matrix at every time-step
@@ -49,7 +51,7 @@ function plotmain(inputfile,outputfile, dtquit)
         shading interp;
         view(0,90);
         hold on;
-        pause(dtout); % time accurate plot
+        %pause(dtout/scale); % time accurate plot
         
         gifmaker(gifname, h, i); % saves gif
         if((i-1)*dtout > dtquit) % break at steady state
