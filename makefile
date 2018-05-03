@@ -25,7 +25,7 @@ weld.exe: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 test:
-	time ./weld.exe inputs/debug > outputs/out
+	time ./weld.exe inputs/debug
 
 clean:
 	rm ./src/obj/*.o

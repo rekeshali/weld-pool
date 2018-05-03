@@ -7,20 +7,26 @@ dx = 1/MM;
 M = MM*(b-a);
 
 [x,y] = meshgrid(a:dx:b);
+outname = 'temp';
+infile = 'debug';
+gifname = sprintf('%s_%s.gif', outname, infile);
+command = sprintf('rm %s', gifname);
+system(command);
 % [xq, yq] = meshgrid(a:dx/k:b);
 %% LETS MAKE A MOVIE
-fid = fopen("temp.o");
+filedir = sprintf("../outputs/%s.o",outname);
+fid = fopen(filedir);
 i = 1;
 h = figure;
 %axis tight manual % this ensures that getframe() returns a consistent size
-filename = 'testAnimated.gif';
 while ~feof(fid)
     %% READ CURRENT TEMP
     T = fgetmat(fid);
     %% PLOT TEMPERATURE 
     surf(x,y,T); 
-    colorbar;
-    caxis([0 1]);
+    c = colorbar;
+    ylabel(c, 'Temperature (K)', 'FontSize', 16, 'Rotation', 270);
+    caxis([0 2]);
     colormap jet
     shading interp;
     view(0,90);
@@ -34,9 +40,9 @@ while ~feof(fid)
       [imind,cm] = rgb2ind(im,256); 
       % Write to the GIF File 
       if i == 1 
-          imwrite(imind,cm,filename,'gif', 'Loopcount',inf, 'WriteMode','overwrite'); 
+          imwrite(imind,cm,gifname,'gif', 'Loopcount',inf, 'WriteMode','overwrite'); 
       else 
-          imwrite(imind,cm,filename,'gif','WriteMode','append'); 
+          imwrite(imind,cm,gifname,'gif','WriteMode','append'); 
       end 
        i = i + 1;
 end
