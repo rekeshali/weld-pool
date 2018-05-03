@@ -28,7 +28,7 @@ function plotmain(inputfile,outputfile, dtquit)
                 c = colorbar;
                 ylc = ylabel(c, 'Temperature (K)', 'FontSize', 20, 'Rotation', 270);
                 posy = get(ylc, 'Position');
-                set(ylc, 'Position', posy + [1.7 1 0]);
+                set(ylc, 'Position', posy + [1.7 (Omax-Omin)/2 0]);
                 caxis([Omin Omax]);
                 ylabel('Y Dimension (m)');
                 xlabel('X Dimension (m)');   
