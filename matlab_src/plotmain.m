@@ -1,4 +1,6 @@
 function plotmain(inputfile,outputfile)
+    % Example: plotmain('debug','temp') runs the temp output from the debug
+    % input file
     [x, y, dtout] = readinput(inputfile);
     
     gifname = sprintf('%s_%s.gif', outputfile, inputfile); % name of gif
