@@ -52,10 +52,11 @@ function plotmain(inputfile,outputfile, dtquit)
         pause(dtout); % time accurate plot
         
         gifmaker(gifname, h, i); % saves gif
-        i = i + 1;
-        if((i-1)*dtout > dtquit)
+        if((i-1)*dtout > dtquit) % break at steady state
             break;
         end
+        
+        i = i + 1;
     end
     fclose(fid);
 end
