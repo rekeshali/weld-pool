@@ -1,5 +1,6 @@
 //============================= EQUATION OF STATE
 #include "global.h"
+#include <stdio.h>
 
 double conduct(double p);  // declare function
 
