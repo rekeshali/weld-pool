@@ -34,7 +34,7 @@ void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], doub
         x_gauss = a + ((double)i - 0.5)*dx;
         Q_gauss = a_gauss * exp(-(x_gauss - b_gauss)*(x_gauss - b_gauss)/(2*c_gauss*c_gauss)); // gaussian distribution of flux
   		//Fy[i][M] = (T[i][M] - Q_gauss)/R; // input temperature
-		Fy[i][M] = Q_gauss/dx;  // input flux
+		Fy[i][M] = - Q_gauss/dx;  // input flux
 		//Fy[i][M] = (T[i][M] - Tinf)/(R + 1/h); // convective 2-D
 	}
 
