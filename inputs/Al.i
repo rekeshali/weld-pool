@@ -10,5 +10,5 @@ rho     L       Tm      h       Tinf
 Cs      Cl      ks      kl
 .903    1.146   237     218
 INITIAL CONDITIONS
-T0      Tl
-298     5000
+T0      Q0      Tmax
+298     2000    1300
