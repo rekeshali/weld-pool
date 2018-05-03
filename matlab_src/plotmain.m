@@ -1,7 +1,7 @@
-function plotmain(inputfile,outputfile)
+function plotmain(inputfile,outputfile, dtquit)
     % Example: plotmain('debug','temp') runs the temp output from the debug
     % input file
-    [x, y, dtout] = readinput(inputfile);
+    [x, y, dtout] = readinput(inputfile); % gets mesh and dtout
     
     gifname = sprintf('%s_%s.gif', outputfile, inputfile); % name of gif
     command = sprintf('rm %s', gifname); % deletes old
@@ -10,37 +10,52 @@ function plotmain(inputfile,outputfile)
     filedir = sprintf("../outputs/%s.o",outputfile); % output file dir
     fid = fopen(filedir); % opens file
     
-    [Omin, Omax] = getminmax(outputfile); % finds min/max Temp for scale
+    if(outputfile(1:4) == 'temp')
+        [Omin, Omax] = getminmax(outputfile); % gets min/max Temp for scale
+    end
     
     i = 1;
     h = figure;
+    set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.1, .6, 0.8]);
     
     while ~feof(fid)
         O = fgetmat(fid); % gets output matrix at every time-step
         surf(x,y,O); 
-        
-        if(outputfile == 'temp') % no colorbar if phase
-            c = colorbar;
-            ylc = ylabel(c, 'Temperature (K)', 'FontSize', 16, 'Rotation', 270);
-            posy = get(c, 'Position');
-            %set(ylc, 'Position', posy + [0 0 0]);
-            caxis([Omin Omax]);
-            ylabel('Y Dimension (m)');
-            xlabel('X Dimension (m)');
-            
-        elseif(outputfile == 'phase')
-            ylabel('Phase', 'FontSize', 16);
-            
+        if(i == 1)
+            if(outputfile(1:4) == 'temp') % no colorbar if phase
+                c = colorbar;
+                ylc = ylabel(c, 'Temperature (K)', 'FontSize', 20, 'Rotation', 270);
+                posy = get(ylc, 'Position');
+                set(ylc, 'Position', posy + [1.7 1 0]);
+                caxis([Omin Omax]);
+                ylabel('Y Dimension (m)');
+                xlabel('X Dimension (m)');   
+            elseif(outputfile(1:5) == 'phase')
+                ylabel('Y Dimension (m)');
+                xlabel('X Dimension (m)');
+            end
         end
         
-        set(gca, 'FontSize', 16);
+        titstr = sprintf('time elapsed = %.4f s', (i-1)*dtout);
+        if(outputfile(1:4) == 'temp') % no colorbar if phase
+            titstr = sprintf('Temperature, %s', titstr);
+            title(titstr);
+        elseif(outputfile(1:5) == 'phase')
+            titstr = sprintf('Phase, %s', titstr);
+            title(titstr)
+        end
+        set(gca, 'FontSize', 20);
         colormap jet
         shading interp;
         view(0,90);
+        hold on;
         pause(dtout); % time accurate plot
         
         gifmaker(gifname, h, i); % saves gif
         i = i + 1;
+        if((i-1)*dtout > dtquit)
+            break;
+        end
     end
     fclose(fid);
 end
