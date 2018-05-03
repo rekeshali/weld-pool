@@ -30,3 +30,6 @@ test:
 clean:
 	rm ./src/obj/*.o
 	rm *.exe
+
+clear:
+	rm ./outputs/*
