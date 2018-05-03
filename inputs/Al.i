@@ -1,14 +1,14 @@
 TIME
 factor  dtout   tend
-0.9     0.012   10
+0.5     0.004       1
 SPACE
 MM  a   b
-100 0   0.04
+100  0   0.04
 MATERIAL
 rho     L       Tm      h       Tinf
-4500    440000  1953    5       298
+2702    398     933     5       298
 Cs      Cl      ks      kl
-536     592     21      30
+.903    1.146   237     218
 INITIAL CONDITIONS
-T0      Q0
-298     50000
+T0      Tl
+298     5000
