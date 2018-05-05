@@ -10,7 +10,7 @@ ODIR = src/obj
 _DEPS = global.h declarations.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o readfile.o init.o mesh.o output.o flux.o pde.o eos.o conduct.o
+_OBJ = main.o readfile.o init.o mesh.o output.o flux.o pde.o eos.o conduct.o BCFlux.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: $(SDIR)/%.c

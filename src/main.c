@@ -21,7 +21,7 @@ int main(int argc, char * argv[]){
 	int MM;
 	double tend, dtout, factor;
 	readfile(inp, &factor, &dtout, &tend, &MM); // reads from filename inp
-
+	printf("Q0 = %f, T0 = %f, Tm = %f, MM = %i\n", Q0, T0, Tm, MM);
 	//============================ CREATE MESH
 	M = (double)MM*(b-a); // number of CV's
 	M = (int)M;
@@ -34,6 +34,9 @@ int main(int argc, char * argv[]){
 	double t0 = 0.0; // start time
 	double kmax = fmax(kl, ks);
 	double Cmin = fmin(Cl, Cs);
+	if(!BCType){ // for const temp BC
+		Tmax = Q0;
+	}
 	double dtEXPL = dx*dx*Cmin*rho/(2.*kmax*Tmax); // CFL number
 	dt = factor*dtEXPL; // dt fraction of CFL for stability purposes
 	int Nend = (int)((tend - t0)/dt) + 1; // number of timesteps
@@ -48,12 +51,15 @@ int main(int argc, char * argv[]){
 
 	//============================ BEGIN TIMESTEPPING
 	double Fx[M+1][M+1], Fy[M+1][M+1]; // initialize flux array
+	double F0[M+1]; // flux distribution array at boundary
+	BCFlux(F0); // gaussian vs uniform distribution
+
 	output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, ERR); // print to file
 
-    #pragma omp parallel for num_threads(4) schedule(dynamic)  // parallel for loop
+ //   #pragma omp parallel for num_threads(4) schedule(dynamic)  // parallel for loop
 	for(nsteps = 1; nsteps <= Nend; nsteps++){
 		time = nsteps*dt; // current time
-		flux(W, Fx, Fy, T, p); // current flux at walls
+		flux(W, Fx, Fy, T, p, F0); // current flux at walls
 		pde(W, E, Fx, Fy); // updates energy with forward euler
 		eos(W, E, T, p, Fx, Fy); // updates temperatures and phases
 		/*if(time > tout2)

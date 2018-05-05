@@ -10,5 +10,5 @@ rho     L       Tm      h       Tinf
 Cs      Cl      ks      kl
 .447    .654    80.2    32.1
 INITIAL CONDITIONS
-T0      Tl      Tmax
-298     5000    2100
+T0      Tl      Tmax    BCType(0=Temp, 1=Flux)
+298     5000    2100    1

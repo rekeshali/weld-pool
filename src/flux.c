@@ -1,11 +1,12 @@
 //============================================ create fluxes at faces between CV's
 #include "global.h"
 #include <math.h>
+#include <stdio.h>
 
 double conduct(double p);  // declare function
 
-void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], double p[][W+1]){
-	double k, ki, kim, R, a_gauss, b_gauss, c_gauss, x_gauss, Q_gauss;
+void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], double p[][W+1], double F0[]){
+	double k, ki, kim, R;
 	// Boundaries
 		// Left and right
 	for(int j = 1; j <= M; j++){
@@ -25,16 +26,16 @@ void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], doub
 		R = dx/(2*k);
 		//Fy[i][0] = -(T[i][1] - Q0)/R; //F_1/2
         Fy[i][0] = - (T[i][0] - Tinf)/(R + 1/h); // bottom; convective 2-D
+		//===================== TOP =======================================
 		k = conduct(p[i][M]);
 		R = dx/(2*k);
-		//F[M] = - (T[M] - Tinf)/(R + 1/h); // convective 1-D
-        a_gauss = Q0;
-        b_gauss = 0.5 * (b-a);
-        c_gauss = 1/(Q0 * sqrt(2*pi));
-        x_gauss = a + ((double)i - 0.5)*dx;
-        Q_gauss = a_gauss * exp(-(x_gauss - b_gauss)*(x_gauss - b_gauss)/(2*c_gauss*c_gauss)); // gaussian distribution of flux
-  		//Fy[i][M] = (T[i][M] - Q_gauss)/R; // input temperature
-		Fy[i][M] = - Q_gauss/dx;  // input flux
+		if(!BCType){ // checks boundary condition type
+			Fy[i][M] = (T[i][M] - F0[i])/R; // const temp BC
+			printf("TEMPBC, Flux = %f\n", Fy[i][M]);
+		}else{
+			Fy[i][M] = - F0[i]/(dx);  // const Flux BC
+		printf("FLUXBC, Flux = %f\n", Fy[i][M]);
+		}
 		//Fy[i][M] = (T[i][M] - Tinf)/(R + 1/h); // convective 2-D
 	}
 

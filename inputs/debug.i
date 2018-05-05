@@ -10,5 +10,5 @@ rho     L       Tm      h       Tinf
 Cs      Cl      ks      kl
 1       1       1      1
 INITIAL CONDITIONS
-T0      Tl      Tmax
-0       2       100
+T0      Tl      Tmax    BCType(0=Temp, 1=Flux)  FType(0=Gaussian, 1=Uniform)
+0       2       10      0                       0
