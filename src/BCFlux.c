@@ -9,7 +9,7 @@ void BCFlux(double F0[]){
 
 	double x;
 	double center = 0.5*(b-a); // location of peak
-	double scale = 5; // will look like gaussian of 5 max
+	double scale = 5/(b); // will look like gaussian of 5 max
 	double stddev = 1/(scale*sqrt(2*pi)); // width of flux
 	for(int i = 1; i <= M; i++){ // for every node
 		x = a + ((double)i - 0.5)*dx; // location of current node

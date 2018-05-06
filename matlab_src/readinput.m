@@ -19,8 +19,9 @@ function [x,y,dtout] = readinput(inputfile)
     a = str2double(data{2});
     b = str2double(data{3});
 
-    dx = 1/(MM-1);
-    [x,y] = meshgrid(a:dx:b); % mesh for plotting secured
+    M = MM*(b-a);
+    gridline = linspace(a,b,M);
+    [x,y] = meshgrid(gridline); % mesh for plotting secured
     
     fclose(fID); % being neat
 end

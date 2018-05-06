@@ -37,12 +37,16 @@ int main(int argc, char * argv[]){
 	if(!BCType){ // for const temp BC
 		Tmax = Q0;
 	}
-	double dtEXPL = dx*dx*Cmin*rho/(2.*kmax*Tmax); // CFL number
+	//double dtEXPL = dx*dx*Cmin*rho/(2.*kmax*Tmax); // CFL number
+	double dtEXPL = dx*dx*rho*Cmin/(4.*kmax);
 	dt = factor*dtEXPL; // dt fraction of CFL for stability purposes
 	int Nend = (int)((tend - t0)/dt) + 1; // number of timesteps
+	double Nend2 = ((tend - t0)/dt) + 1;
 	int nsteps = 0; // initialize timestep
 	double time = t0; // initialize time
 	double tout = fmax(dtout, dt); //tout2 = 0.004; // time for printing to file
+	//dt = 0.01;
+	printf("tend = %f, dt = %.15e, Nend = %i", tend, dt, Nend);
 
 	//============================ INITIALIZE PROFILE
 	double T[M+2][M+2], E[M+1][M+1], p[M+1][M+1], ERR = 0.0; // solution array and max error

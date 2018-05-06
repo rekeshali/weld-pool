@@ -11,24 +11,25 @@ function plotmain(inputfile,outputfile, dtquit)
     filedir = sprintf("../outputs/%s.o",outputfile); % output file dir
     fid = fopen(filedir); % opens file
     
-    if(outputfile(1:4) == 'temp')
-        [Omin, Omax] = getminmax(outputfile); % gets min/max Temp for scale
-    end
+  %  if(outputfile(1:4) == 'temp')
+        [O, Omin, Omax, N] = getoutput(outputfile); % gets min/max Temp for scale
+  %  end
     
-    i = 1;
+%     i = 1;
     h = figure;
     set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.1, .6, 0.8]);
     set(gcf,'color','w');
     
-    while ~feof(fid)
-        O = fgetmat(fid); % gets output matrix at every time-step
-        surf(x,y,O); 
+%     while ~feof(fid)
+    for i = 1:N
+        % O = fgetmat(fid); % gets output matrix at every time-step
+        surf(x,y,O(:,:,i)); 
         if(i == 1)
             if(outputfile(1:4) == 'temp') % no colorbar if phase
                 c = colorbar;
                 ylc = ylabel(c, 'Temperature (K)', 'FontSize', 20, 'Rotation', 270);
                 posy = get(ylc, 'Position');
-                set(ylc, 'Position', posy + [1.7 (Omax-Omin)/2 0]);
+                set(ylc, 'Position', posy + [2, (Omax-Omin)/2 - posy(2), 0]);
                 caxis([Omin Omax]);
                 ylabel('Y Dimension (m)');
                 xlabel('X Dimension (m)');   
@@ -38,7 +39,7 @@ function plotmain(inputfile,outputfile, dtquit)
             end
         end
         
-        titstr = sprintf('time elapsed = %.4f s', (i-1)*dtout);
+        titstr = sprintf('time elapsed = %f s', (i-1)*dtout);
         if(outputfile(1:4) == 'temp') % no colorbar if phase
             titstr = sprintf('Temperature, %s', titstr);
             title(titstr);
@@ -58,7 +59,7 @@ function plotmain(inputfile,outputfile, dtquit)
             break;
         end
         
-        i = i + 1;
+    %    i = i + 1;
     end
     fclose(fid);
 end
