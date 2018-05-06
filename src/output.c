@@ -55,7 +55,23 @@ void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+
 	fprintf(ENTH, "\n");
 	fclose(ENTH);
 	//================================================= TIMESTAMPS/ETC
-	fprintf(OUT, "%i %9.4f\n", nsteps, time);
+	double xl, xr, yd, width, depth, energy;
+	int il = M/2, ir = M/2, id = M;
+	for(int k = 1; k <= M; k++){ // bounds for width of pool
+		if(p[k-1][M] < 1 && p[k+1][M] == 1){
+			il = k;}
+		if(p[k-1][M] == 1 && p[k+1][M] < 1){
+			ir = k;}
+		if(p[M/2][k-1] < 1 && p[M/2][k+1] == 1){
+			id = k;}
+	}
+	xl = a + ((double)il - 0.5)*dx;
+	xr = a + ((double)ir - 0.5)*dx;
+	yd = a + ((double)id - 0.5)*dx;
+	width = xr - xl;
+	depth = b - yd;
+	energy = Q0*time;
+	fprintf(OUT, "%i %6.4f %6.4f %6.4f %6.4f\n", nsteps, time, width, depth, energy);
 	//fprintf(OUT, "# Error up to this time: %.15e\n\n", ERR);
 
 	/*for(int j = M+1; j >= 0; j--){
