@@ -1,7 +1,7 @@
 //======================== print solution profile to text file at certain times
 #include "global.h"
 #include <stdio.h>
-void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+1], double Fy[][W+1], double E[][W+1], double p[][W+1], double time, int nsteps, double ERR){
+void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+1], double Fy[][W+1], double E[][W+1], double p[][W+1], double time, int nsteps, double tend){
 //	double flux, energy, phase;
 	FILE *OUT;
 	FILE *TEMP;
@@ -9,7 +9,7 @@ void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+
 	FILE *ENTH; // initialize file var
 	if(!nsteps){ // if haven't begun time stepping 
 		OUT = fopen("outputs/values.o", "w"); // new file
-		fprintf(OUT,"#nstep time\n");
+		fprintf(OUT,"#nstep time (ms)  width (cm) depth(cm) energy (J)\n");
 		TEMP = fopen("outputs/temp.o", "w"); // new file
 		//fprintf(TEMP,"#Temperatures by timesteps\n");
 		PHASE = fopen("outputs/phase.o", "w"); // new file
@@ -68,11 +68,24 @@ void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+
 	xl = a + ((double)il - 0.5)*dx;
 	xr = a + ((double)ir - 0.5)*dx;
 	yd = a + ((double)id - 0.5)*dx;
-	width = xr - xl;
-	depth = b - yd;
-	energy = Q0*time;
-	fprintf(OUT, "%i %6.4f %6.4f %6.4f %6.4f\n", nsteps, time, width, depth, energy);
+	width = 100*(xr - xl); // in cm
+	depth = 100*(b - yd); // in cm
+	energy = Q0*time; // in Joules
+	fprintf(OUT, "%i %6.4f %6.4f %6.4f %6.4f\n", nsteps, 1000*time, width, depth, energy);
 	//fprintf(OUT, "# Error up to this time: %.15e\n\n", ERR);
+	//
+	// COMPLETION BAR
+	if(nsteps == 0){
+		printf("0%%       20%%       40%%       60%%        80%%        100%%\n");
+		printf(" ");
+	}
+	if( time > nbar*tend/50 ){
+		//printf("%3.0f%%\n", 100*time/tend);
+		printf("=");
+		fflush(stdout);
+		nbar = nbar + 1;
+	}
+
 
 	/*for(int j = M+1; j >= 0; j--){
 		for(int i = 0; i <= M+1; i++){

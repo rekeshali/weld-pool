@@ -42,15 +42,15 @@ int main(int argc, char * argv[]){
 	printf("tend = %f, dt = %.15e, Nend = %i\n", tend, dt, Nend);
 
 	//============================ INITIALIZE PROFILE
-	double T[M+2][M+2], E[M+1][M+1], p[M+1][M+1], ERR = 0.0; // solution array and max error
+	double T[M+2][M+2], E[M+1][M+1], p[M+1][M+1]; // solution array and max error
 	init(W, T, E, p); // fills solution array
 
 	//============================ BEGIN TIMESTEPPING
 	double Fx[M+1][M+1], Fy[M+1][M+1]; // initialize flux array
 	double F0[M+1]; // flux distribution array at boundary
 	BCFlux(F0); // gaussian vs uniform distribution
-
-	output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, ERR); // print to file
+	nbar = 1;
+	output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, tend); // print to file
 
  //   #pragma omp parallel for num_threads(4) schedule(dynamic)  // parallel for loop
 	for(nsteps = 1; nsteps <= Nend; nsteps++){
@@ -59,7 +59,7 @@ int main(int argc, char * argv[]){
 		pde(W, E, Fx, Fy); // updates energy with forward euler
 		eos(W, E, T, p, Fx, Fy); // updates temperatures and phases
 		if(time > tout){ // when time to print
-			output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, ERR); // print to file
+			output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, tend); // print to file
 			tout = tout + dtout; // next print time
         }
 	}
