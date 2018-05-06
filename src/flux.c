@@ -34,7 +34,7 @@ void flux(const int W, double Fx[][W+1], double Fy[][W+1], double T[][W+2], doub
 			printf("TEMPBC, Flux = %f\n", Fy[i][M]);
 		}else{
 			Fy[i][M] = - F0[i]/(dx);  // const Flux BC
-		printf("FLUXBC, Flux = %f\n", Fy[i][M]);
+			printf("FLUXBC, Flux = %f\n", Fy[i][M]);
 		}
 		//Fy[i][M] = (T[i][M] - Tinf)/(R + 1/h); // convective 2-D
 	}

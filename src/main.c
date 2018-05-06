@@ -10,7 +10,6 @@
 int main(int argc, char * argv[]){
 	//============================ Initialize I/O
 	char inp[20];
-//	char out[20];
 	if(argc == 1){
 		sprintf(inp, "input");
 	}else{
@@ -21,7 +20,6 @@ int main(int argc, char * argv[]){
 	int MM;
 	double tend, dtout, factor;
 	readfile(inp, &factor, &dtout, &tend, &MM); // reads from filename inp
-	printf("Q0 = %f, T0 = %f, Tm = %f, MM = %i\n", Q0, T0, Tm, MM);
 	//============================ CREATE MESH
 	M = (double)MM*(b-a); // number of CV's
 	M = (int)M;
@@ -34,24 +32,18 @@ int main(int argc, char * argv[]){
 	double t0 = 0.0; // start time
 	double kmax = fmax(kl, ks);
 	double Cmin = fmin(Cl, Cs);
-	if(!BCType){ // for const temp BC
-		Tmax = Q0;
-	}
-	//double dtEXPL = dx*dx*Cmin*rho/(2.*kmax*Tmax); // CFL number
 	double dtEXPL = dx*dx*rho*Cmin/(4.*kmax);
 	dt = factor*dtEXPL; // dt fraction of CFL for stability purposes
 	int Nend = (int)((tend - t0)/dt) + 1; // number of timesteps
 	double Nend2 = ((tend - t0)/dt) + 1;
 	int nsteps = 0; // initialize timestep
 	double time = t0; // initialize time
-	double tout = fmax(dtout, dt); //tout2 = 0.004; // time for printing to file
-	//dt = 0.01;
-	printf("tend = %f, dt = %.15e, Nend = %i", tend, dt, Nend);
+	double tout = fmax(dtout, dt); // time for printing to file
+	printf("tend = %f, dt = %.15e, Nend = %i\n", tend, dt, Nend);
 
 	//============================ INITIALIZE PROFILE
 	double T[M+2][M+2], E[M+1][M+1], p[M+1][M+1], ERR = 0.0; // solution array and max error
 	init(W, T, E, p); // fills solution array
-//    output(X, T, time, nsteps, ERR); // prints to file
 
 	//============================ BEGIN TIMESTEPPING
 	double Fx[M+1][M+1], Fy[M+1][M+1]; // initialize flux array
@@ -66,16 +58,9 @@ int main(int argc, char * argv[]){
 		flux(W, Fx, Fy, T, p, F0); // current flux at walls
 		pde(W, E, Fx, Fy); // updates energy with forward euler
 		eos(W, E, T, p, Fx, Fy); // updates temperatures and phases
-		/*if(time > tout2)
-			phasefront(p, time);
-			tout2 = tout2 + .004;
-		}*/
 		if(time > tout){ // when time to print
-			//ERR = compare(X, T, M, k, time); // find max error
 			output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, ERR); // print to file
 			tout = tout + dtout; // next print time
         }
 	}
-	//ERR = compare(X, T, M, k, time); // max error for final
-	//output(X, T, time, nsteps, ERR, F); // final solution output to file 
 }
