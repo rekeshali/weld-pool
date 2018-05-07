@@ -1,6 +1,6 @@
  filedir = sprintf("../outputs/flxdst.o"); % output file dir
     fid = fopen(filedir); % opens file
-    picname = 'flxdst2000W5000MM.png';
+    picname = 'flxdst8000W1000MM.png';
 
     data = fgetmat(fid);
     fclose(fid);
