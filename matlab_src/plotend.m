@@ -3,7 +3,7 @@ function plotend(inputfile, outputfile, x, y, MM, Q, tend)
     Omax
     Omin
     picname = sprintf('%s_%s_%d_%d.png', inputfile, outputfile, MM, Q);
-    Omax = 2377.85;
+    Omax = 7064.03;
     Omin = 298;
     fig = figure;
     hold on

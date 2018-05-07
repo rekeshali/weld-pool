@@ -3,7 +3,7 @@ factor  dtout   tend
 1.0     0.00001       1
 SPACE
 MM  a   b
-10000  0   0.04
+5000  0   0.04
 MATERIAL
 rho     L       Tm      h       Tinf
 7870    272     1810    500       298

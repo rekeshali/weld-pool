@@ -11,4 +11,4 @@ Cs      Cl      ks      kl
 .903    1.146   237     218
 INITIAL CONDITIONS
 T0      BC      BCType(0=Temp, 1=Flux)  FType(0=Gaussian, 1=Uniform)
-298     4000    1                       0
+298     8000    1                       0
