@@ -1,7 +1,9 @@
 function plotend(inputfile, outputfile, x, y, MM, Q, tend)
     [O, Omin, Omax, ~] = getoutput(outputfile, 1);
+    Omax
+    Omin
     picname = sprintf('%s_%s_%d_%d.png', inputfile, outputfile, MM, Q);
-    
+    Omin = 298;
     fig = figure;
     hold on
     set(gcf, 'Units', 'Normalized', 'OuterPosition', [0.1, 0.1, .6, 0.8]);
@@ -24,10 +26,12 @@ function plotend(inputfile, outputfile, x, y, MM, Q, tend)
     end
 
     if(outputfile(1:4) == 'temp') % no colorbar if phase
-        titstr = sprintf('Temperature, MM = %.0f, Q = %.0fW, Time = %4.2fms', MM , Q, 1000*tend);
+        titstr = sprintf('%s, Temperature, MM = %.0f, Q = %.0fW, Time = %4.2fms', ...
+            inputfile, MM , Q, 1000*tend);
         title(titstr);
     elseif(outputfile(1:5) == 'phase')
-        titstr = sprintf('Phase, MM = %.0f, Q = %.0fW, Time = %4.2fms', MM , Q, 1000*tend);
+        titstr = sprintf('%s, Phase, MM = %.0f, Q = %.0fW, Time = %4.2fms', ...
+            inputfile, MM , Q, 1000*tend);
         title(titstr)
     end
 

@@ -1,5 +1,5 @@
  //const int * W;
- int M, BCType, FType, nbar;
+ int M, BCType, FType, nbar, maxwidth;
  double a, b;
  double dt, dx, dy;
  double Cs, Cl;

@@ -19,9 +19,9 @@ void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+
 	}
 	else{
 		OUT = fopen("outputs/values.o", "a"); // old file
-		TEMP = fopen("outputs/temp.o", "a"); // old file
-		PHASE = fopen("outputs/phase.o", "a"); // old file
-		ENTH = fopen("outputs/enth.o", "a"); // old file
+		TEMP = fopen("outputs/temp.o", "w"); // old file
+		PHASE = fopen("outputs/phase.o", "w"); // old file
+		ENTH = fopen("outputs/enth.o", "w"); // old file
 	}
 	// hidden time, steps, error
 	// position and profile in columns
@@ -57,11 +57,19 @@ void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+
 	//================================================= TIMESTAMPS/ETC
 	double xl, xr, yd, width, depth, energy;
 	int il = M/2, ir = M/2, id = M;
-	for(int k = 1; k <= M; k++){ // bounds for width of pool
-		if(p[k-1][M] < 1 && p[k+1][M] == 1){
-			il = k;}
-		if(p[k-1][M] == 1 && p[k+1][M] < 1){
-			ir = k;}
+	for(int l = M/2; l <= M; l++){
+		for(int k = 1; k <= M; k++){ // bounds for width of pool
+			if(p[k-1][l] < 1 && p[k+1][l] == 1){
+				if(k < il){
+					il = k;}
+			}
+			if(p[k-1][l] == 1 && p[k+1][l] < 1){
+				if(k > ir){
+					ir = k;}
+			}
+	}
+	}
+	for(int k = 1; k <= M; k++){
 		if(p[M/2][k-1] < 1 && p[M/2][k+1] == 1){
 			id = k;}
 	}
@@ -84,6 +92,12 @@ void output(const int W, double X[], double Y[], double T[][W+2], double Fx[][W+
 		printf("=");
 		fflush(stdout);
 		nbar = nbar + 1;
+	}
+	if(width > 2){
+		maxwidth = 1;
+		int barleft = 50 - nbar;
+		for(int g = 0; g <= barleft; g++){
+		printf("=");}
 	}
 
 

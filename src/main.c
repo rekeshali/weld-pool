@@ -38,18 +38,19 @@ int main(int argc, char * argv[]){
 	double Nend2 = ((tend - t0)/dt) + 1;
 	int nsteps = 0; // initialize timestep
 	double time = t0; // initialize time
-	double tout = fmax(dtout, dt); // time for printing to file
-	printf("tend = %f, dt = %.15e, Nend = %i\n", tend, dt, Nend);
+	double tout = fmax(dtout, dt); // time for printing to fil
+
+	printf("M = %i, tend = %f, dt = %.15e, Nend = %i\n", M, tend, dt, Nend);
 
 	//============================ INITIALIZE PROFILE
 	double T[M+2][M+2], E[M+1][M+1], p[M+1][M+1]; // solution array and max error
 	init(W, T, E, p); // fills solution array
-
 	//============================ BEGIN TIMESTEPPING
 	double Fx[M+1][M+1], Fy[M+1][M+1]; // initialize flux array
 	double F0[M+1]; // flux distribution array at boundary
 	BCFlux(F0); // gaussian vs uniform distribution
 	nbar = 1;
+	maxwidth = 0;
 	output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, tend); // print to file
 
  //   #pragma omp parallel for num_threads(4) schedule(dynamic)  // parallel for loop
@@ -62,5 +63,7 @@ int main(int argc, char * argv[]){
 			output(W, X, Y, T, Fx, Fy, E, p, time, nsteps, tend); // print to file
 			tout = tout + dtout; // next print time
         }
+		if(maxwidth){
+		break;}
 	}
 }

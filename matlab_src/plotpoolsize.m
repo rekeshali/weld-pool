@@ -20,10 +20,10 @@ function plotpoolsize(inputfile, MM, Q)
     xlim([0 max(time)]);
     xlabel('Time (ms)');
     ylabel('Size (cm)');
-    tit = sprintf('Pool Size, MM = %.0f, Q = %.0fW', MM, Q);
+    tit = sprintf('%s, Pool Size, MM = %.0f, Q = %.0fW', inputfile, MM, Q);
     title(tit);
     legend({'Width','Depth'})
-    set(gca, 'FontSize', 16);
+    set(gca, 'FontSize', 20);
     grid on
     
     frame = getframe(fig); 
